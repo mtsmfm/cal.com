@@ -13,7 +13,7 @@ env:
   INPUT_ENV_GOOGLE_LOGIN_ENABLED: true
   # INPUT_ENV_CRON_API_KEY: xxx
   # INPUT_ENV_CRON_ENABLE_APP_SYNC: true|false
-  INPUT_ENV_CALENDSO_ENCRYPTION_KEY: ${{ secrets.CI_CALENDSO_ENCRYPTION_KEY }}
+  INPUT_ENV_CALENDSO_ENCRYPTION_KEY: LvdhGHpkZ399gMq3EfbgWw0nLNh6q/hJ
   INPUT_ENV_NEXT_PUBLIC_STRIPE_PUBLIC_KEY: ${{ secrets.CI_NEXT_PUBLIC_STRIPE_PUBLIC_KEY }}
   INPUT_ENV_STRIPE_PRIVATE_KEY: ${{ secrets.CI_STRIPE_PRIVATE_KEY }}
   INPUT_ENV_STRIPE_CLIENT_ID: ${{ secrets.CI_STRIPE_CLIENT_ID }}
@@ -40,7 +40,7 @@ env:
 
 jobs:
   create_env_file:
-    runs-on: buildjet-4vcpu-ubuntu-2204
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/dangerous-git-checkout
