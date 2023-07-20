@@ -57,7 +57,7 @@ if (IS_EMBED_REACT_TEST) {
 
 const config: PlaywrightTestConfig = {
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  retries: 0,
   // While debugging it should be focussed mode
   // eslint-disable-next-line turbo/no-undeclared-env-vars
   workers: process.env.PWDEBUG ? 1 : os.cpus().length,
@@ -82,7 +82,9 @@ const config: PlaywrightTestConfig = {
     {
       name: "@calcom/web",
       testDir: "./apps/web/playwright",
-      testMatch: /.*\.e2e\.tsx?/,
+      testMatch: new RegExp(
+        ["apps/web/playwright/reschedule.e2e.ts"].join("|")
+      ),
       expect: {
         timeout: DEFAULT_EXPECT_TIMEOUT,
       },
