@@ -1,11 +1,11 @@
 name: E2E test
 on:
-  workflow_call:
+  pull_request:
 jobs:
   e2e:
     timeout-minutes: 20
     name: E2E tests (${{ matrix.shard }}/${{ strategy.job-total }})
-    runs-on: buildjet-4vcpu-ubuntu-2204
+    runs-on: ubuntu-22.04
     services:
       postgres:
         image: postgres:12.1
@@ -24,7 +24,12 @@ jobs:
       - run: echo 'NODE_OPTIONS="--max_old_space_size=4096"' >> $GITHUB_ENV
       - uses: ./.github/actions/yarn-install
       - uses: ./.github/actions/yarn-playwright-install
-      - uses: ./.github/actions/env-read-file
+      - run: |
+          cp .env.example .env
+          sed -i 's;DATABASE_URL=.*;DATABASE_URL="postgresql://postgres:@localhost:5432/calendso";g' .env
+          sed -i "s;NEXTAUTH_SECRET=.*;NEXTAUTH_SECRET=\"$(openssl rand -base64 32)\";g" .env
+          sed -i "s;CALENDSO_ENCRYPTION_KEY=.*;CALENDSO_ENCRYPTION_KEY=\"$(openssl rand -base64 24)\";g" .env
+          sed -i "s;EMAIL_SERVER_HOST=.*;;g" .env
       - uses: ./.github/actions/cache-db
       - uses: ./.github/actions/cache-build
       - name: Run Tests
