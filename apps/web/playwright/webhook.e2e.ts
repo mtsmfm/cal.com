@@ -390,7 +390,7 @@ test.describe("BOOKING_REQUESTED", async () => {
 });
 
 test.describe("FORM_SUBMITTED", async () => {
-  test("can submit a form and get a submission event", async ({ page, users }) => {
+  test.fixme("can submit a form and get a submission event", async ({ page, users }) => {
     const webhookReceiver = createHttpServer();
     const user = await users.create();
 

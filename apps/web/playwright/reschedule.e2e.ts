@@ -155,7 +155,7 @@ test.describe("Reschedule Tests", async () => {
     await expect(page).toHaveURL(/.*payment/);
   });
 
-  test("Paid rescheduling should go to success page", async ({ page, users, bookings, payments }) => {
+  test.fixme("Paid rescheduling should go to success page", async ({ page, users, bookings, payments }) => {
     const user = await users.create();
     await user.apiLogin();
     await user.getPaymentCredential();

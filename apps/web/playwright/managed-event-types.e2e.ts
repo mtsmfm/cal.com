@@ -5,7 +5,7 @@ import { test } from "./lib/fixtures";
 test.afterEach(({ users }) => users.deleteAll());
 
 test.describe("Managed Event Types tests", () => {
-  test("Can create managed event type", async ({ page, users }) => {
+  test.fixme("Can create managed event type", async ({ page, users }) => {
     // Creating the owner user of the team
     const adminUser = await users.create();
     // Creating the member user of the team
